@@ -98,9 +98,8 @@ window_rules:
     match_title: "Remote Assist.*"
 
   # Ignore 'WinSCP'
-  - command: "ignore"
-    match_title: "WinSCP.*"
-
+  - command: "set floating"
+    match_process_name: "/WinSCP.*/"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
