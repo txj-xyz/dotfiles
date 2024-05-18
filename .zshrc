@@ -16,7 +16,17 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Custom aliases ---
-alias cdd='cd `find * -type d | fzf`'
+
+# MacOS / Linux based Fuzzy Find change directory
+if [[ "$(uname -s)" -eq "Darwin" ]]; then
+  # MacOS
+  alias cdd='cd `find . -type d ! -path "*/Library/*" -o -prune | fzf --preview="ls -la {}"`'
+else
+  # Linux
+  alias cdd='cd `find * -type d | fzf --preview "ls -la {}"`'
+fi
+
+#cdd='cd `find . -type d ! -path "*/Library/*" -o -prune | fzf --preview="ls -la {}"`'
 alias codef='code `fzf`; exit 0'
 alias coded='code `find * -type d | fzf`; exit 0'
 alias c='clear'
