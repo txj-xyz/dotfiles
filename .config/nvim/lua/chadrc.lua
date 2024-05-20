@@ -5,12 +5,14 @@
 local M = {}
 
 M.ui = {
-	theme = "doomchad",
-
+	theme = "github_dark",
+  plugins = "custom.plugins",
+  -- mappings = require "custom.mappings"
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
 	-- },
 }
+
 
 return M
