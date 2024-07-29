@@ -1,0 +1,37 @@
+# Autocomplete (possibly broken for Z shell)
+autoload -U compinit && compinit
+
+# Load Oh-My-ZSH settings.
+export ZSH="$HOME/.oh-my-zsh"
+
+# ZSH Themes / Settings
+ZSH_THEME="agnoster"
+ZSH_DISABLE_COMPFIX=true
+# Autoupdate OMZ
+zstyle ':omz:update' mode auto
+
+# Plugins Enabled for OMZ
+plugins=(git)
+
+# Load OMZ now.
+source $ZSH/oh-my-zsh.sh
+
+# Load ENV settings and tweaks
+export EDITOR=nvim
+
+
+# Autoprint neofetch if its found
+[ -x "$(command -v neofetch)" ] && neofetch
+
+# --- Aliases ---
+if [[ "$(uname -s)" -eq "Darwin" ]]; then
+  # Mac Aliases
+  alias q='exit';
+  alias cdd='cd $(find . -type d ! -path "*/Library/*" -o -prune | fzf --preview"ls -la {}")'
+  alias c='clear'
+  alias nvimd='nvim $(find * -type d | fzf)'
+  alias nvimf='nvim $(fzf)'
+fi
+
+# Programming Lang(s)
+[[ -d /usr/local/go/bin/ && ":$PATH:" != *:/usr/local/go/bin:* ]] && export PATH=$PATH:/usr/local/go/bin
