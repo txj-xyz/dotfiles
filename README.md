@@ -9,3 +9,14 @@ After having `chezmoi` installed run the following command to pull down the repo
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply txj-xyz
 ```
 
+# Updating files / editing
+
+If you want to apply your new updates to tracked files, run:
+
+```bash
+# If you updated local files instead of chezmoi, run this
+chezoi re-add
+
+# If you updated with `chezmoi cd; nvim`
+chezmoi apply
+```
