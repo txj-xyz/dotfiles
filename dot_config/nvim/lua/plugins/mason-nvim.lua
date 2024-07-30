@@ -1,8 +1,8 @@
 local plugins = {
-{
-  "williamboman/mason.nvim",
-  	opts =  require "configs.mason"
-  }
+  {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
 }
 
 return plugins
