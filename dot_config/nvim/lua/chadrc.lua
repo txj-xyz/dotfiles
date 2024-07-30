@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-	theme = "github_dark",
+	theme = "catppuccin",
   plugins = "custom.plugins",
   -- mappings = require "custom.mappings"
 	-- hl_override = {
