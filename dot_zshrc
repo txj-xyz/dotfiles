@@ -32,6 +32,9 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   alias c='clear'
   alias nvimd='nvim $(find * -type d | fzf)'
   alias nvimf='nvim $(fzf)'
+  alias gs='git status'
+  alias gc='git commit'
+  alias gp='git push'
 else
   # Linux
   export PATH=$PATH:/usr/local/go/bin
