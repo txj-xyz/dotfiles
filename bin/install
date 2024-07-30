@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+
+if [[ "$(uname -s)" -eq "Darwin" ]]; then
+  if ! command -v brew; then
+    echo "Installing 'brew'..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Brew is now installed."
+  fi
+  # ZSH
+  brew install zsh
+  # Oh-my-zsh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # ZSH Autosuggestions Plugin
+  brew install zsh-autosuggestions
+  # ZSH Syntax Highlighting
+  brew install zsh-syntax-highlighting
+fi
