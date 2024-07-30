@@ -22,4 +22,8 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
 
   # FZF
   brew install fzf
+
+  # NVM
+  brew install nvm
+  nvm install --lts
 fi
