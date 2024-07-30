@@ -19,7 +19,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Load ENV settings and tweaks
 export EDITOR=nvim
-
+export HOMEBREW_NO_ENV_HINTS=1
 
 # Autoprint neofetch if its found
 [ -x "$(command -v neofetch)" ] && neofetch
@@ -37,3 +37,9 @@ else
   export PATH=$PATH:/usr/local/go/bin
 fi
 
+
+# ZSH Plugins via Brew CLI
+if [[ "$(uname -s)" -eq "Darwin" ]]; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
