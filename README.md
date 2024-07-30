@@ -19,4 +19,7 @@ chezoi re-add
 
 # If you updated with `chezmoi cd; nvim`
 chezmoi apply
+
+# Edit directly and apply
+chezmoi edit ~/.zshrc; chezmoi apply
 ```
