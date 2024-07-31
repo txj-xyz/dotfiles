@@ -26,4 +26,7 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   # NVM
   brew install nvm
   nvm install --lts
+
+  # FastFetch / Neofetch
+  brew install fastfetch
 fi
