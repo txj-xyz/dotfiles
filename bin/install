@@ -12,7 +12,7 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   brew install zsh
   
   # Oh-my-zsh
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   
   # ZSH Autosuggestions Plugin
   brew install zsh-autosuggestions
