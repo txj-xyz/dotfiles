@@ -1,8 +1,11 @@
 local options = {
   enabled = true,
   code = {
-    enabled = false,
-    style = "full",
+    enabled = true,
+    style = 'full',
+    sign = true,
+    position = 'right',
+    highlight = 'RenderMarkdownCode',
   }
 }
 
