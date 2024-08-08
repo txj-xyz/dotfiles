@@ -33,6 +33,8 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   alias gs='git status'
   alias gc='git commit'
   alias gp='git push'
+  alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
+
 
   # Mac PATH
   export NVM_DIR="$HOME/.nvm"
