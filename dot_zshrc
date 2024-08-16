@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 # Load ENV settings and tweaks
 export EDITOR=nvim
 export HOMEBREW_NO_ENV_HINTS=1
-
+export TERM=xterm-256color
 
 # --- Aliases / PATH Exports ---
 if [[ "$(uname -s)" -eq "Darwin" ]]; then
@@ -30,11 +30,16 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   alias c='clear'
   alias nvimd='nvim $(find * -type d | fzf)'
   alias nvimf='nvim $(fzf)'
+  
+  # GIT Aliases
   alias gs='git status'
   alias gc='git commit'
   alias gp='git push'
-  alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
+  alias grup='git pull upstream main && git push -u'
 
+  # SOCKS5 Proxy over private VPN network
+  alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
+  
 
   # Mac PATH
   export NVM_DIR="$HOME/.nvm"
@@ -46,10 +51,12 @@ else
 fi
 
 
-# ZSH Plugins via Brew CLI
+# Plugins via Brew CLI
 if [[ "$(uname -s)" -eq "Darwin" ]]; then
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # Angular autocomplete 
+  source <(ng completion script)
 fi
 
 
