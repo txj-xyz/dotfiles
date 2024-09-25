@@ -5,7 +5,7 @@ autoload -U compinit && compinit
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH Themes / Settings
-ZSH_THEME="agnoster"
+ZSH_THEME="gnzh"
 ZSH_DISABLE_COMPFIX=true
 
 # Autoupdate OMZ
@@ -30,7 +30,8 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   alias c='clear'
   alias nvimd='nvim $(find * -type d | fzf)'
   alias nvimf='nvim $(fzf)'
-  
+  alias lg='lazygit'
+
   # GIT Aliases
   alias gs='git status'
   alias gc='git commit'
