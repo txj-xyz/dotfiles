@@ -38,6 +38,9 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   alias gp='git push'
   alias grup='git pull upstream main && git push -u'
 
+  # Work Alias for Macbook
+  alias gcw='~/.config/git-hooks/flex-git.sh'
+
   # SOCKS5 Proxy over private VPN network
   alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
   

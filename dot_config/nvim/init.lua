@@ -37,6 +37,16 @@ require("lazy").setup({
   },
 }, lazy_config)
 
+-- Load NVIM tree with custom options
+require("nvim-tree").setup({
+  filters = {
+    dotfiles = true
+  },
+  git = {
+    ignore = false,
+  }
+})
+
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
