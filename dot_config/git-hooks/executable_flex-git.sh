@@ -35,11 +35,33 @@ prompt_jira_issue() {
   fi
 }
 
+check_repo_history() {
+  git_log_found=$(git log --oneline | grep -oE '[[A-Za-z]+-[0-9]+]+ [[a-z]+]')
+  if [[ -z "$git_log_found" ]]; then
+    return 1
+  else
+    echo $git_log_found
+    return 0
+  fi
+}
+
 # --------------------
 # set -xe
 
 # First check if we are in a git repo
 check_git_repo
+
+# Check if we have a previous issue / feature type
+last_known_reason=$(check_repo_history)
+if [[ $? -eq 0 ]]; then
+  echo -e "${YELLOW}Found last known JIRA / Feature type of '$last_known_reason'\nDo you want to use this for the commit prefix? [Y/n] ${NC}"; read answer_last;
+  if [[ $answer_last =~ ^[Yy]$ ]] || [[ -z $answer_last ]]; then
+    echo -e "${YELLOW}Commit message: ${NC}"; read commit_message;
+    git commit -m "$last_known_reason $commit_message"
+    exit 0
+  fi
+fi
+
 
 # Prompt for Jira issue and validate it against regex to make sure we have a number
 prompt_jira_issue
@@ -55,9 +77,8 @@ select purpose in "${purposes[@]}"; do
   fi
 done
 
-# Prompt for the branch name
-echo -e "${YELLOW}Branch name:${NC}"; read branch_name
+# Prompt for the commit message
+echo -e "${YELLOW}Commit message: ${NC}"; read commit_message 
 
-# Final result
-
-git switch -c "$jira_issue_number/$purpose/$branch_name"
+# finally do the message
+git commit -m "[$jira_issue_number] [$purpose] $commit_message"
