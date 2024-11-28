@@ -1,6 +1,11 @@
 # `dotfiles` for txj-xyz
 This repo uses [chezmoi](https://chezmoi.io/) for management of `$HOME` dotfiles.
 
+# Required files
+## Fonts:
+
+- [Hack Nerd Font Mono](https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#option-7-install-script) 
+
 # Setup a new machine with this repo
 
 After having `chezmoi` installed run the following command to pull down the repo's latest changes to the new machine and apply them to your `$HOME` dir
