@@ -57,10 +57,13 @@ fi
 
 # Plugins via Brew CLI
 if [[ "$(uname -s)" -eq "Darwin" ]]; then
+  # Autosuggestions and Syntax highlighting 
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
   # Angular autocomplete 
   source <(ng completion script)
+
   # Rye Install
   source "$HOME/.rye/env"
 fi
