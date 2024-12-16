@@ -36,7 +36,7 @@ prompt_jira_issue() {
 }
 
 check_repo_history() {
-  git_log_found=$(git log --oneline | grep -oE '[[A-Za-z]+-[0-9]+]+ [[a-z]+]')
+  git_log_found=$(git log --oneline | grep -oE '[[A-Za-z]+-[0-9]+]+ [[a-z]+]' | head -1)
   if [[ -z "$git_log_found" ]]; then
     return 1
   else
