@@ -30,6 +30,18 @@ if [[ "$(uname -s)" -eq "Darwin" ]]; then
   # FastFetch / Neofetch
   brew install fastfetch
 
+  # Golang
+  brew install go
+
+  # Neovim
+  brew install nvim
+
+  # If existing chezmoi skip install
+  [ -x "$(command -v chezmoi)" ] || brew install chezmoi
+
+  # Lazygit
+  brew install lazygit
+
   # Install Rye
   echo "Install Rye by using the following command: 'curl -sSf https://rye.astral.sh/get | bash'"
 
