@@ -1,4 +1,4 @@
-# Autocomplete (possibly broken for Z shell)
+# Autocomplete
 autoload -U compinit && compinit
 
 # Load Oh-My-ZSH settings.
