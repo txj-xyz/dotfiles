@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- LSP Servers to Enable
-local servers = { "html", "cssls", "bashls", "gopls" }
+local servers = { "html", "cssls", "bashls", "gopls", "ts_ls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
