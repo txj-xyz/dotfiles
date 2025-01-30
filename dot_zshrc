@@ -1,82 +1,92 @@
 # Autocomplete
 autoload -U compinit && compinit
 
-# Load Oh-My-ZSH settings.
+# Oh-My-Zsh Settings
 export ZSH="$HOME/.oh-my-zsh"
 
-# ZSH Themes / Settings
+# ZSH Theme and Configuration
 ZSH_THEME="gnzh"
 ZSH_DISABLE_COMPFIX=true
 
-# Autoupdate OMZ
+# Auto-update for Oh-My-Zsh
 zstyle ':omz:update' mode auto
 
-# Plugins Enabled for OMZ
+# Plugins for Oh-My-Zsh
 plugins=(git)
 
-# Load OMZ now.
+# Load Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Load ENV settings and tweaks
+# Environment Variables
 export EDITOR=nvim
 export HOMEBREW_NO_ENV_HINTS=1
 export TERM=xterm-256color
 
-# --- Aliases / PATH Exports ---
-if [[ "$(uname -s)" -eq "Darwin" ]]; then
-  # Mac
-  alias q='exit';
-  alias cdd='cd $(find . -type d ! -path "*/.*" ! -path "*./Library/*" -o -prune | fzf --preview "ls {}")'
-  alias c='clear'
-  alias nvimd='nvim $(find * -type d | fzf)'
-  alias nvimf='nvim $(fzf)'
-  alias lg='lazygit'
-  alias ports='listening_ports'
-
-  # GIT Aliases
-  alias gs='git status'
-  alias gc='git commit'
-  alias gp='git push'
-  alias grup='git pull upstream main && git push -u'
-
-  # Work Alias for Macbook
-  alias gcw='~/.config/git-hooks/flex-git.sh'
-
-  # SOCKS5 Proxy over private VPN network
-  alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
-  
-
-  # Mac PATH
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# Determine the platform
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    PLATFORM="macOS"
+elif [[ "$(uname -s)" == "Linux" ]]; then
+    PLATFORM="Linux"
 else
-  # Linux
-  export PATH=$PATH:/usr/local/go/bin
+    PLATFORM="Unknown"
 fi
 
+# Platform-specific configurations
+case $PLATFORM in
+    "macOS")
+        # macOS-specific aliases and functions
+        alias q='exit'
+        alias c='clear'
+        alias cdd='cd $(find . -type d ! -path "*/.*" ! -path "*./Library/*" -o -prune | fzf --preview "ls {}")'
+        alias nvimd='nvim $(find * -type d | fzf)'
+        alias nvimf='nvim $(fzf)'
+        alias lg='lazygit'
+        alias ports='listening_ports'
 
-# Plugins via Brew CLI
-if [[ "$(uname -s)" -eq "Darwin" ]]; then
-  # Autosuggestions and Syntax highlighting 
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        # Git aliases
+        alias gs='git status'
+        alias gc='git commit'
+        alias gp='git push'
+        alias grup='git pull upstream main && git push -u'
 
-  # Angular autocomplete 
-  [ -x "$(command -v ng)" ] && source <(ng completion script)
+        # Work-specific alias
+        alias gcw='~/.config/git-hooks/flex-git.sh'
 
-  # Rye Install
-  source "$HOME/.rye/env"
-fi
+        # SOCKS5 Proxy alias
+        alias proxy_txj_home='ssh -D 1337 txj@192.168.193.193'
 
+        # macOS PATH and NVM setup
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+        [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
-# Autoprint neofetch if its found
+        # Plugins via Homebrew for macOS
+        source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+        # Angular CLI autocompletion
+        [ -x "$(command -v ng)" ] && source <(ng completion script)
+
+        # Rye environment setup
+        source "$HOME/.rye/env"
+        ;;
+
+    "Linux")
+        # Linux-specific PATH
+        export PATH=$PATH:/usr/local/go/bin
+        ;;
+
+    "Unknown")
+        echo "Warning: Unknown platform detected. Some features might not work as expected."
+        ;;
+esac
+
+# Autoprint system information if fastfetch is available
 [ -x "$(command -v fastfetch)" ] && fastfetch
 
-
-
+# Function to list listening ports
 listening_ports() {
-  if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ]; then
         lsof -iTCP -sTCP:LISTEN -n -P
     elif [ $# -eq 1 ]; then
         lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
