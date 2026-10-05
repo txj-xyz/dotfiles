@@ -7,6 +7,13 @@
         "linux",
         "macos"
       ]
+    },
+    {
+      "path": ".ssh/config",
+      "os": [
+        "linux",
+        "macos"
+      ]
     }
   ]
 }
