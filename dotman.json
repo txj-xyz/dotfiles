@@ -1,4 +1,12 @@
 {
   "version": 1,
-  "entries": []
+  "entries": [
+    {
+      "path": ".config/fish/config.fish",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    }
+  ]
 }
