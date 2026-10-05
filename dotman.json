@@ -24,8 +24,7 @@
     {
       "path": "Documents/Path of Building/Builds",
       "os": [
-        "linux",
-        "macos"
+        "linux"
       ]
     }
   ]
