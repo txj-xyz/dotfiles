@@ -16,6 +16,13 @@
       ]
     },
     {
+      "path": "Documents/Path of Building (PoE2)/Builds",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    },
+    {
       "path": "Documents/Path of Building/Builds",
       "os": [
         "linux",
