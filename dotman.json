@@ -4,7 +4,8 @@
     {
       "path": ".config/fish/config.fish",
       "os": [
-        "linux"
+        "linux",
+        "macos"
       ]
     }
   ]
