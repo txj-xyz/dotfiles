@@ -18,3 +18,7 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # opencode
 fish_add_path /home/txj/.opencode/bin
+
+function fish_greeting
+  fastfetch --config arch
+end
