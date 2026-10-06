@@ -9,6 +9,13 @@
       ]
     },
     {
+      "path": ".config/ghostty",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    },
+    {
       "path": ".ssh/config",
       "os": [
         "linux",
