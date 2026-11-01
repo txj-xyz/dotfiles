@@ -22,3 +22,6 @@ fish_add_path /home/txj/.opencode/bin
 function fish_greeting
   fastfetch --config arch
 end
+
+# Added by LM Studio CLI tool (lms)
+set -gx PATH $PATH /home/txj/.lmstudio/bin
