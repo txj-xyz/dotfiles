@@ -18,8 +18,7 @@
     {
       "path": ".config/waybar",
       "os": [
-        "linux",
-        "macos"
+        "linux"
       ]
     },
     {
