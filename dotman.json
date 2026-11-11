@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "path": ".config/fastfetch",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    },
+    {
       "path": ".config/fish/config.fish",
       "os": [
         "linux",
