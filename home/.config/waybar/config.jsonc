@@ -1,0 +1,210 @@
+// macOS-style menu bar for KDE Plasma.
+// Previous config: ~/.config/waybar/backup-2026-11-11/
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 2,
+
+  "modules-left": [
+    "custom/apple",
+    "group/desktops"
+  ],
+
+  "modules-center": [],
+
+  "modules-right": [
+    "tray",
+    "cpu",
+    "memory",
+    "group/control-center",
+    "clock",
+    "custom/desktop-watch"
+  ],
+
+  // Apple menu
+  "custom/apple": {
+    "format": "",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/apple-menu.xml",
+    "menu-actions": {
+      "about": "kinfocenter",
+      "settings": "systemsettings",
+      "monitor": "plasma-systemmonitor",
+      "sleep": "systemctl suspend",
+      "restart": "busctl --user call org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt promptReboot",
+      "shutdown": "busctl --user call org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt promptShutDown",
+      "lock": "loginctl lock-session",
+      "logout": "busctl --user call org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt promptLogout"
+    }
+  },
+
+  // ------------------------------------------------------------ virtual desktops
+  // One button per KDE virtual desktop (up to 8; unused ones stay hidden).
+  // Click to switch, scroll to move between desktops.
+  "group/desktops": {
+    "orientation": "inherit",
+    "modules": [
+      "custom/desktop1", "custom/desktop2", "custom/desktop3", "custom/desktop4",
+      "custom/desktop5", "custom/desktop6", "custom/desktop7", "custom/desktop8"
+    ]
+  },
+  "custom/desktop1": { "exec": "~/.config/waybar/scripts/kde-desktops status 1", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 1", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop2": { "exec": "~/.config/waybar/scripts/kde-desktops status 2", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 2", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop3": { "exec": "~/.config/waybar/scripts/kde-desktops status 3", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 3", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop4": { "exec": "~/.config/waybar/scripts/kde-desktops status 4", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 4", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop5": { "exec": "~/.config/waybar/scripts/kde-desktops status 5", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 5", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop6": { "exec": "~/.config/waybar/scripts/kde-desktops status 6", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 6", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop7": { "exec": "~/.config/waybar/scripts/kde-desktops status 7", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 7", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  "custom/desktop8": { "exec": "~/.config/waybar/scripts/kde-desktops status 8", "return-type": "json", "interval": "once", "signal": 8, "on-click": "~/.config/waybar/scripts/kde-desktops switch 8", "on-scroll-up": "~/.config/waybar/scripts/kde-desktops prev", "on-scroll-down": "~/.config/waybar/scripts/kde-desktops next" },
+  // Invisible helper: refreshes the desktop buttons as soon as KWin switches desktops.
+  "custom/desktop-watch": {
+    "exec": "~/.config/waybar/scripts/kde-desktops watch",
+    "tooltip": false
+  },
+
+  // ------------------------------------------------------------ status
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 3,
+    "tooltip": true,
+    "on-click": "plasma-systemmonitor"
+  },
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "interval": 5,
+    "tooltip-format": "{used:0.1f} GiB of {total:0.1f} GiB used",
+    "on-click": "plasma-systemmonitor"
+  },
+
+  // ------------------------------------------------------------ Control Center
+  // Click the toggles icon to slide the quick controls out; click again to close.
+  "group/control-center": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 280,
+      "transition-left-to-right": false,
+      "children-class": "cc-item",
+      "click-to-reveal": true
+    },
+    "modules": [
+      "custom/control-center",
+      "mpris",
+      "pulseaudio/slider",
+      "pulseaudio",
+      "custom/mic",
+      "network",
+      "bluetooth",
+      "power-profiles-daemon",
+      "idle_inhibitor",
+      "custom/screenshot",
+      "custom/settings"
+    ]
+  },
+  "custom/control-center": {
+    "format": "󰔡",
+    "tooltip-format": "Control Center",
+    "on-click-right": "systemsettings"
+  },
+  "mpris": {
+    "format": "{status_icon} {dynamic}",
+    "dynamic-order": ["title", "artist"],
+    "dynamic-len": 32,
+    "status-icons": { "playing": "󰏤", "paused": "󰐊", "stopped": "󰓛" },
+    "tooltip-format": "{player}: {title} — {artist}",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": { "default": ["󰕿", "󰖀", "󰕾"], "headphone": "󰋋", "headset": "󰋎" },
+    "tooltip-format": "{desc}",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "scroll-step": 5
+  },
+  "custom/mic": {
+    "exec": "~/.config/waybar/scripts/mic status",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 9,
+    "on-click": "~/.config/waybar/scripts/mic toggle",
+    "on-click-right": "pavucontrol --tab=4"
+  },
+  "network": {
+    "format-wifi": "󰖩",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+    "tooltip-format-disconnected": "Not connected",
+    "on-click": "systemsettings kcm_networkmanagement"
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "Bluetooth: {status}",
+    "tooltip-format-connected": "Connected:\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "systemsettings kcm_bluetooth"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "format-icons": { "default": "󰾅", "performance": "󰓅", "balanced": "󰾅", "power-saver": "󰾆" },
+    "tooltip-format": "Power profile: {profile} (click to change)"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": { "activated": "󰅶", "deactivated": "󰾪" },
+    "tooltip-format-activated": "Keep awake: on",
+    "tooltip-format-deactivated": "Keep awake: off"
+  },
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot",
+    "on-click": "spectacle"
+  },
+  "custom/settings": {
+    "format": "󰒓",
+    "tooltip-format": "System Settings",
+    "on-click": "systemsettings"
+  },
+
+  // ------------------------------------------------------------ clock + calendar
+  // Hover for the calendar; scroll over it to change month; right-click for the year.
+  "clock": {
+    "format": "{:%a %b %e  %I:%M %p}",
+    "tooltip-format": "<span size='large'>{:%A, %B %e, %Y}</span>\n\n<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#f5f5f7'><b>{}</b></span>",
+        "weekdays": "<span color='#8e8e93'><b>{}</b></span>",
+        "days": "<span color='#d1d1d6'>{}</span>",
+        "today": "<span background='#0a84ff' color='#ffffff'><b> {} </b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_down",
+      "on-scroll-down": "shift_up"
+    }
+  }
+}
