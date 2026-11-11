@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The  menu (custom/apple). Item ids map to "menu-actions" in config.jsonc. -->
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child><object class="GtkMenuItem" id="about"><property name="label">About This PC</property></object></child>
+    <child><object class="GtkSeparatorMenuItem" id="sep1"/></child>
+    <child><object class="GtkMenuItem" id="settings"><property name="label">System Settings…</property></object></child>
+    <child><object class="GtkMenuItem" id="monitor"><property name="label">Activity Monitor…</property></object></child>
+    <child><object class="GtkSeparatorMenuItem" id="sep2"/></child>
+    <child><object class="GtkMenuItem" id="sleep"><property name="label">Sleep</property></object></child>
+    <child><object class="GtkMenuItem" id="restart"><property name="label">Restart…</property></object></child>
+    <child><object class="GtkMenuItem" id="shutdown"><property name="label">Shut Down…</property></object></child>
+    <child><object class="GtkSeparatorMenuItem" id="sep3"/></child>
+    <child><object class="GtkMenuItem" id="lock"><property name="label">Lock Screen</property></object></child>
+    <child><object class="GtkMenuItem" id="logout"><property name="label">Log Out…</property></object></child>
+  </object>
+</interface>

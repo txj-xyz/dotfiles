@@ -1,0 +1,209 @@
+/* macOS-style menu bar. Previous style: ~/.config/waybar/backup-2026-11-11/ */
+
+@define-color bar        rgba(28, 28, 30, 0.72);
+@define-color text       #f5f5f7;
+@define-color text-dim   rgba(245, 245, 247, 0.55);
+@define-color hover      rgba(255, 255, 255, 0.16);
+@define-color pressed    rgba(255, 255, 255, 0.24);
+@define-color accent     #0a84ff;
+@define-color red        #ff453a;
+@define-color popover    rgba(40, 40, 42, 0.96);
+@define-color hairline   rgba(255, 255, 255, 0.12);
+
+* {
+  font-family: "SF Pro Text", "Inter", "Noto Sans", "MesloLGS Nerd Font Propo", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+window#waybar {
+  background: @bar;
+  color: @text;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+/* Every item: no pill at rest, a soft rounded highlight on hover (like macOS). */
+#custom-apple,
+#custom-desktop1, #custom-desktop2, #custom-desktop3, #custom-desktop4,
+#custom-desktop5, #custom-desktop6, #custom-desktop7, #custom-desktop8,
+#tray, #cpu, #memory, #clock,
+#custom-control-center, #mpris, #pulseaudio, #custom-mic, #network, #bluetooth,
+#power-profiles-daemon, #idle_inhibitor, #custom-screenshot, #custom-settings {
+  color: @text;
+  background: transparent;
+  padding: 0 9px;
+  margin: 4px 1px;
+  border-radius: 6px;
+  transition: background-color 120ms ease;
+}
+
+#custom-apple:hover,
+#tray:hover, #cpu:hover, #memory:hover, #clock:hover,
+#custom-control-center:hover, #mpris:hover, #pulseaudio:hover, #custom-mic:hover,
+#network:hover, #bluetooth:hover, #power-profiles-daemon:hover, #idle_inhibitor:hover,
+#custom-screenshot:hover, #custom-settings:hover {
+  background: @hover;
+}
+
+/*  */
+#custom-apple {
+  font-family: "MesloLGS Nerd Font Propo";
+  font-size: 17px;
+  padding: 0 13px 0 14px;
+  margin-left: 4px;
+}
+
+/* ---------------------------------------------------------------- desktops */
+#desktops {
+  margin-left: 6px;
+}
+#custom-desktop1, #custom-desktop2, #custom-desktop3, #custom-desktop4,
+#custom-desktop5, #custom-desktop6, #custom-desktop7, #custom-desktop8 {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 14px;
+  padding: 0 6px;
+  margin: 6px 2px;
+  color: @text-dim;
+  border-radius: 5px;
+}
+#custom-desktop1.inactive:hover, #custom-desktop2.inactive:hover,
+#custom-desktop3.inactive:hover, #custom-desktop4.inactive:hover,
+#custom-desktop5.inactive:hover, #custom-desktop6.inactive:hover,
+#custom-desktop7.inactive:hover, #custom-desktop8.inactive:hover {
+  background: @hover;
+  color: @text;
+}
+#custom-desktop1.active, #custom-desktop2.active, #custom-desktop3.active, #custom-desktop4.active,
+#custom-desktop5.active, #custom-desktop6.active, #custom-desktop7.active, #custom-desktop8.active {
+  background: rgba(255, 255, 255, 0.88);
+  color: #1c1c1e;
+  padding: 0 11px;
+}
+
+/* ---------------------------------------------------------------- status */
+#tray {
+  padding: 0 8px;
+}
+#tray > .needs-attention {
+  background: rgba(255, 69, 58, 0.35);
+  border-radius: 4px;
+}
+#cpu, #memory {
+  color: @text-dim;
+  font-feature-settings: "tnum";
+}
+#clock {
+  font-weight: 600;
+  padding: 0 12px 0 10px;
+  margin-right: 6px;
+  font-feature-settings: "tnum";
+}
+
+/* ---------------------------------------------------------------- Control Center */
+#control-center {
+  margin: 0 2px;
+}
+#custom-control-center {
+  font-family: "MesloLGS Nerd Font Propo";
+  font-size: 16px;
+  padding: 0 10px;
+}
+/* The drawer's items sit on a single rounded "tray" so they read as one flyout. */
+#control-center .cc-item {
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+  border-radius: 0;
+}
+#control-center .cc-item:first-child {
+  border-radius: 7px 0 0 7px;
+  padding-left: 6px;
+}
+#custom-mic, #network, #bluetooth, #power-profiles-daemon, #idle_inhibitor,
+#custom-screenshot, #custom-settings, #pulseaudio {
+  font-family: "MesloLGS Nerd Font Propo", "Noto Sans";
+  font-size: 15px;
+}
+#pulseaudio {
+  font-size: 13px;
+}
+#pulseaudio.muted, #custom-mic.muted {
+  color: @red;
+}
+#bluetooth.off, #bluetooth.disabled {
+  color: @text-dim;
+}
+#bluetooth.connected, #idle_inhibitor.activated, #power-profiles-daemon.performance {
+  color: @accent;
+}
+#power-profiles-daemon.power-saver {
+  color: #30d158;
+}
+#mpris {
+  color: @text;
+  padding: 0 10px;
+}
+#mpris.paused, #mpris.stopped {
+  color: @text-dim;
+}
+
+/* Volume slider */
+#pulseaudio-slider {
+  padding: 0 4px 0 10px;
+}
+#pulseaudio-slider slider {
+  min-height: 12px;
+  min-width: 12px;
+  margin: -4px 0;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+#pulseaudio-slider trough {
+  min-height: 4px;
+  min-width: 90px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+#pulseaudio-slider highlight {
+  min-height: 4px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------------- tooltips + menus */
+tooltip {
+  background: @popover;
+  border: 1px solid @hairline;
+  border-radius: 10px;
+}
+tooltip label {
+  color: @text;
+  padding: 4px 6px;
+}
+
+menu {
+  background: @popover;
+  border: 1px solid @hairline;
+  border-radius: 10px;
+  padding: 5px;
+}
+menu menuitem {
+  color: @text;
+  padding: 4px 22px 4px 10px;
+  border-radius: 5px;
+}
+menu menuitem:hover {
+  background: @accent;
+  color: #ffffff;
+}
+menu separator {
+  background: @hairline;
+  min-height: 1px;
+  margin: 4px 8px;
+}

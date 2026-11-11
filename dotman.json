@@ -16,6 +16,13 @@
       ]
     },
     {
+      "path": ".config/waybar",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    },
+    {
       "path": ".ssh/config",
       "os": [
         "linux",

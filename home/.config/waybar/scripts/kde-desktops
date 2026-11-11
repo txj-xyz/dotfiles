@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# KDE Plasma virtual desktops for Waybar (KWin has no ext-workspace protocol,
+# so this talks to KWin over D-Bus).
+#
+#   kde-desktops status N   JSON for desktop N (empty text = hidden module)
+#   kde-desktops switch N   go to desktop N
+#   kde-desktops next|prev  go to the next / previous desktop
+#   kde-desktops watch      refresh the desktop modules whenever KWin changes desktops
+SIGNAL=8   # must match "signal" on the custom/desktopN modules
+DEST=org.kde.KWin OBJ=/VirtualDesktopManager IFACE=org.kde.KWin.VirtualDesktopManager
+
+prop() { busctl --user get-property "$DEST" "$OBJ" "$IFACE" "$1" --json=short 2>/dev/null; }
+
+case ${1:-} in
+  status)
+    desktops=$(prop desktops) || { echo '{"text":""}'; exit 0; }
+    current=$(prop current | jq -r .data)
+    jq -cn --argjson d "$desktops" --arg cur "$current" --argjson n "${2:-1}" '
+      ($d.data | map(select(.[0] == ($n - 1))) | first) as $e
+      | if $e == null then {text: ""}
+        else {text: ($n | tostring), tooltip: $e[2],
+              class: (if $e[1] == $cur then "active" else "inactive" end)} end'
+    ;;
+  switch) busctl --user call "$DEST" /KWin org.kde.KWin setCurrentDesktop i "${2:-1}" >/dev/null ;;
+  next)   busctl --user call "$DEST" /KWin org.kde.KWin nextDesktop >/dev/null ;;
+  prev)   busctl --user call "$DEST" /KWin org.kde.KWin previousDesktop >/dev/null ;;
+  watch)
+    # Print nothing (keeps this helper module hidden); poke Waybar on every change.
+    parent=$(ps -o ppid= -p $$ | tr -d ' ')
+    pkill -RTMIN+$SIGNAL -x waybar
+    gdbus monitor --session --dest "$DEST" --object-path "$OBJ" 2>/dev/null \
+      > >(while read -r _; do pkill -RTMIN+$SIGNAL -x waybar; done) &
+    monitor=$!
+    trap 'kill "$monitor" 2>/dev/null' EXIT
+    trap 'exit 0' TERM INT HUP   # bash skips the EXIT trap on an untrapped signal
+    # gdbus would outlive a restarted Waybar; stop once the bar that started us is gone.
+    while [[ $(ps -o ppid= -p $$ | tr -d ' ') == "$parent" ]] && kill -0 "$monitor" 2>/dev/null; do
+      sleep 3
+    done
+    ;;
+  *) sed -n '2,10p' "$0"; exit 2 ;;
+esac
