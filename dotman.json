@@ -23,6 +23,13 @@
       ]
     },
     {
+      "path": ".zshrc",
+      "os": [
+        "linux",
+        "macos"
+      ]
+    },
+    {
       "path": "Documents/Path of Building (PoE2)/Builds",
       "os": [
         "linux"
