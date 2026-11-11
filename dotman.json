@@ -4,7 +4,8 @@
     {
       "path": ".config/fastfetch",
       "os": [
-        "linux"
+        "linux",
+        "macos"
       ]
     },
     {
